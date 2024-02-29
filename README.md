@@ -82,6 +82,13 @@ This can be installed through pip:
 pip install video2calibration
 ```
 
+## Generate Videos from Images
+While working with images, a very useful tool for videos generation, image trasformations, frames extracions, overlaying, ect... can be [ffmpeg](https://ffmpeg.org/). For example, with this simple and intuitive command it is possible to generate an output video from a list of input png images:
+
+```bash
+ffmpeg -framerate 30 -pattern_type glob -i '*.png' -c:v libx264 -pix_fmt yuv420p output.mp4
+```
+
 ## BundleSDF on Ubuntu 20.04, Setup and Modifications
 
 ### Resize Output Images
@@ -173,5 +180,3 @@ To keep it short and simple here there are the implementations for computing two
     return chamfer_distance, chamfer_distance_per_point
   ```
 for a complete version of the scores check out [add_score.py]() and [chamfer_distance.py]()
-
-## Generate Videos from Images
