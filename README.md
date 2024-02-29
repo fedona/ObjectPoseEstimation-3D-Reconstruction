@@ -82,6 +82,10 @@ This can be installed through pip:
 pip install video2calibration
 ```
 
+Here is the video recorded with the Kinect, the checkerboard has to be twisted especially around the corners of the frames to favorite the algorithm successfulness.
+
+<video src="https://github.com/fedona/MOT-3D-Reconstruction/blob/main/videos/calibration2.mp4" width="320" height="240" controls>
+
 ## Generate Videos from Images
 While working with images, a very useful tool for videos generation, image trasformations, frames extracions, overlaying, ect... can be [ffmpeg](https://ffmpeg.org/). For example, with this simple and intuitive command it is possible to generate an output video from a list of input png images:
 
