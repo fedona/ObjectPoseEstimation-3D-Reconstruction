@@ -1,6 +1,6 @@
 # MOT-3D-Reconstruction
 This short repository contains the code snippets and modifications that have been necessary to generate a RGBD dataset using a Microsoft Kinect camera, setup
-some MOT & 3D Reconstruction SOTA codes, and produce ADD and CD scores for respectively the accuracy of the pose estimation and 3D reconstruction of the outputs.
+some MOT & 3D Reconstruction SOTA codes, and produce ADD and CD scores for respectively the accuracy of the pose estimation and 3D reconstruction.
 
 #### Machine specifications:
 * CPU: Intel Core i7-9700 @ 3.6 GHz
@@ -90,8 +90,44 @@ ffmpeg -framerate 30 -pattern_type glob -i '*.png' -c:v libx264 -pix_fmt yuv420p
 ```
 
 ## BundleSDF on Ubuntu 20.04, Setup and Modifications
+[BundleSDF](https://bundlesdf.github.io/) is a method for 6-Dof tracking and 3D reconstruction of unknown objects from a monocular RGBD video sequence.
+At the time of February 2024, its official [github repository](https://github.com/NVlabs/BundleSDF) provides straightforward instructions to setup their docker image and run the code successfully. 
+
+Although this should be machine-independent as docker is installed and there is an available CUDA GPU, it has been necessary to install `g++-11` before building the docker image, here follows a list of commands to do so:
+
+```bash
+# check if g++-11 is installed
+which g++-11
+
+# if not installed do:
+sudo apt install build-essential manpages-dev software-properties-common
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+sudo apt update && sudo apt install gcc-11 g++-11
+```
+
+The authors tested BundleSDF on ubuntu 18.04 with a GeForce RTX 3090 as mentioned [here](https://github.com/NVlabs/BundleSDF/issues/18#issuecomment-1612242390) and suggest to have lot of [memory available](https://github.com/NVlabs/BundleSDF/issues/58#issuecomment-1671929927).
+
+In order to run successfully BundleSDF on the demo dataset using a machine with limited GPU memory the following modifications are mandatory:
+
+* modify loftr_wrapper.py reducing the batch size from 64 to 1
+```python
+    #batch_size = 64  FEDONA
+    batch_size = 1
+```
+
+An other necessary modification to the code has to be made in run_custom.py, where the user has to set the distance of the object from the camera:
+```python
+    cfg_bundletrack['depth_processing']["zfar"] = 4  # object distant 4 meters from the camera 
+```
+on this same file is possible to tweak other parameters, for examples the ones that determine the minimal angle between different keyframes.
+
 
 ### Resize Output Images
+When BundleSDF happends to produce output pose_vis images with odd numer of pixels, ffmpeg will fail to generate a video. For this case it is necessary to first resize those images to the correct resolution with this command: 
+
+```bash
+    ffmpeg -i input.png -vf scale=1280:720 output.png # with final resolution 1280x720
+```
 
 ## ADD and CD Scores
 In the field of pose estimation and 3D reconstruction there are many different errors/scores used to evaluate the results, for example, in the [BOP Challenge 2023](https://bop.felk.cvut.cz/challenges/bop-challenge-2023/#task4) there are considered three of them:
