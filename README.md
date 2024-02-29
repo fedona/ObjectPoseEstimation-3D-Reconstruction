@@ -2,6 +2,11 @@
 This short repository contains the code snippets and modifications that have been necessary to generate a RGBD dataset using a Microsoft Kinect camera, setup
 some MOT & 3D Reconstruction SOTA codes, and produce ADD and CD scores for respectively the accuracy of the pose estimation and 3D reconstruction.
 
+TODO
+bundlesdf all the bash files for the reuslts
+images
+pretty touches
+
 #### Machine specifications:
 * CPU: Intel Core i7-9700 @ 3.6 GHz
 * OS: Ubuntu 20.04
