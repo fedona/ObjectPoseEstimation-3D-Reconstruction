@@ -66,6 +66,21 @@ K = | fx   s  cx |
     |  0   0   1 |
 
 where 
+* fx and fy are the focal length in the x and y axis directions
+* cx and cy are the coordinates of the principal points in pixels
+* s is the image skew, usually zero for most cameras
+
+To get the same matrix informations it is possible to exploit camera calibration algorithms, for example Zhang's Method. The advantage is that they can be very preciese and subjective to the used camera, which could always differ a bit from the manufacturer specifications.
+
+Many different implementations of camera calibration algorithms are avaiable online, for example the official Azure Kinect SDK provides its own code [here](https://github.com/microsoft/Azure-Kinect-Sensor-SDK/tree/develop/examples/calibration_registration).
+
+An other convenient method is provided by the [video2calibration](https://github.com/microsoft/Azure-Kinect-Sensor-SDK/tree/develop/examples/calibration_registration) repository, this short python code requires a recorded video of a simple checked board as input, and as long as the board is visible through most of the frames, it returns an accurate camera calibration matrix.
+
+This can be installed through pip:
+
+```
+pip install video2calibration
+```
 
 ## BundleSDF on Ubuntu 20.04, Setup and Modifications
 
