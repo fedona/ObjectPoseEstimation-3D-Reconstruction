@@ -58,8 +58,14 @@ depth = capture.transformed_depth
 
 Check out the [streamAndRecord.py](https://github.com/fedona/MOT-3D-Reconstruction/blob/main/Microsoft%20Azure%20Kinect/streamAndRecord.py) file for a complete version  of it!
 
-
 ### Camera Calibration File
+Camera-recorded datasets need to specify their camera calibration matrix such that datas can be normalized. It is possible to simply compute the camera calibration matrix of a camera when its focal length and resolution specifications are well known, here is how the matrix is composed:
+
+K = | fx   s  cx |
+    |  0  fy  cy |
+    |  0   0   1 |
+
+where 
 
 ## BundleSDF on Ubuntu 20.04, Setup and Modifications
 
