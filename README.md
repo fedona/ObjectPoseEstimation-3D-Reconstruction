@@ -61,7 +61,9 @@ Check out the [streamAndRecord.py](https://github.com/fedona/MOT-3D-Reconstructi
 ### Camera Calibration File
 Camera-recorded datasets need to specify their camera calibration matrix such that datas can be normalized. It is possible to simply compute the camera calibration matrix of a camera when its focal length and resolution specifications are well known, here is how the matrix is composed:
 
+
 <img src="https://github.com/fedona/MOT-3D-Reconstruction/blob/main/images/cam_k.png">
+
 
 where 
 * fx and fy are the focal length in the x and y axis directions
@@ -92,7 +94,9 @@ In the field of pose estimation and 3D reconstruction there are many different e
 
 To keep it short and simple here there are the implementations for computing two basic scores, one for the pose estimation and one for 3D reconstruction:
 * ADD (Average Distance of the Data), having both ground truth and predicted poses, it projects any object to this poses and compares the results computing the mean distance between points, the score is the results of the ratio between poses that are below an acceptance threshold (typically 10% of the object's diameter) and the total number of poses.
+
   <img src="https://github.com/fedona/MOT-3D-Reconstruction/blob/main/images/addScore.png">
+  
   ```python
   def compute_add_score(pts3d, gt_pose, pred_pose, R_rel, t_rel):
     """
@@ -129,7 +133,9 @@ To keep it short and simple here there are the implementations for computing two
   ```
   
 * CD (Chamfer Distance), having both the ground truth and predicted 3D reconstruction of the object, computes the distance of each point of the objects to the closest point of the other object.
+  
   <img src="https://github.com/fedona/MOT-3D-Reconstruction/blob/main/images/CDScore.png">
+  
   ```python
   def compute_chamfer_distance(pts1, pts2):
 
