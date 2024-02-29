@@ -87,5 +87,13 @@ pip install video2calibration
 ### Resize Output Images
 
 ## ADD and CD Scores
+In the field of pose estimation and 3D reconstruction there are many different errors/scores used to evaluate the results, for example, in the [BOP Challenge 2023](https://bop.felk.cvut.cz/challenges/bop-challenge-2023/#task4) there are considered three of them:
+* VSD (Visible Surface Discrepancy)
+* MSSD (Maximum Symmetry-Aware Surface Distance)
+* MSPD (Maximum Symmetry-Aware Projection Distance)
+
+To keep it short and simple here there are the implementations for computing two basic scores, one for the pose estimation and one for 3D reconstruction:
+* ADD (Average Distance of the Data), having both ground truth and predicted poses, it projects any object to this poses and compares the results computing the mean distance between points, the score is the results of the ratio between poses that are below an acceptance threshold (typically 10% of the object's diameter) and the total number of poses.
+* CD (Chamfer Distance), having both the ground truth and predicted 3D reconstruction of the object, 
 
 ## Generate Videos from Images
