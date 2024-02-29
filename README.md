@@ -56,7 +56,7 @@ rgb = capture.color[:, :, :3]
 depth = capture.transformed_depth
 ```
 
-Check out the [streamAndRecord.py]() file for a complete version  of it!
+Check out the [streamAndRecord.py](https://github.com/fedona/MOT-3D-Reconstruction/blob/main/Microsoft%20Azure%20Kinect/streamAndRecord.py) file for a complete version  of it!
 
 
 ### Camera Calibration File
