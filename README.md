@@ -179,4 +179,4 @@ To keep it short and simple here there are the implementations for computing two
 
     return chamfer_distance, chamfer_distance_per_point
   ```
-for a complete version of the scores check out [add_score.py]() and [chamfer_distance.py]()
+for a complete version of the scores check out [add_score.py](https://github.com/fedona/MOT-3D-Reconstruction/blob/main/Scores/add_score.py) and [chamfer_distance.py](https://github.com/fedona/MOT-3D-Reconstruction/blob/main/Scores/chamfer_distance.py)
