@@ -61,9 +61,7 @@ Check out the [streamAndRecord.py](https://github.com/fedona/MOT-3D-Reconstructi
 ### Camera Calibration File
 Camera-recorded datasets need to specify their camera calibration matrix such that datas can be normalized. It is possible to simply compute the camera calibration matrix of a camera when its focal length and resolution specifications are well known, here is how the matrix is composed:
 
-K = | fx   s  cx |
-    |  0  fy  cy |
-    |  0   0   1 |
+<img src="https://github.com/fedona/MOT-3D-Reconstruction/blob/main/images/cam_k.png">
 
 where 
 * fx and fy are the focal length in the x and y axis directions
