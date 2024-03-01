@@ -139,12 +139,28 @@ An other necessary modification to the code has to be made in run_custom.py, whe
 ```
 on this same file is possible to tweak other parameters, for examples the ones that determine the minimal angle between different keyframes.
 
+### Prepare your own dataset
+The official repository provides a small example of a gallon of milk video available [here](https://drive.google.com/file/d/1akutk_Vay5zJRMr3hVzZ7s69GT4gxuWN/view?usp=share_link). This can be used to test if the code correctly runs without having to download large datasets as the suggested HO3D and YCBInEOAT.
+
+If the "milk dataset" correctly runs then it is possible to prepare your own dataset; this has to be organized in the following way:
+```
+   root
+    ├──rgb/    (PNG files)
+    ├──depth/  (PNG files, stored in mm, uint16 format. Filename same as rgb)
+    ├──masks/       (PNG files. Filename same as rgb. 0 is background. Else is foreground)
+    └──cam_K.txt   (3x3 intrinsic matrix, use space and enter to delimit)
+```
+BundleSDF uses a wrapper for [XMem](https://github.com/hkchengrex/XMem) to generate the masks, but this is not included in the code due to license issues, so to generate the masks it is necessary to download XMem from their official repository.
+
+An other fast and interactive way to get the masks of the subjects is to use other segmentation alternatives as [MiVOS](https://github.com/hkchengrex/MiVOS) or [Cutie](https://github.com/hkchengrex/Cutie).
+
 ### Produce pose_vis Videos
 BundleSDF does generate under the folder pose_vis images of the predicted pose's bounding box around the subject. In order to comfortably see these results it is possible to generate a video using [ffmpeg](https://ffmpeg.org/).
 
 <div align='center'><img src="https://github.com/fedona/MOT-3D-Reconstruction/blob/main/images/ffmpeg_logo.png" height=100></div>
 
 Ffmpeg is a useful tool when working with images and audio files, it is also used for image trasformations, frames extracions, overlaying, format conversion, ...
+
 For example, with this simple and intuitive command it is possible to generate an output video from a list of input png images:
 
 ```bash
