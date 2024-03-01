@@ -89,14 +89,7 @@ pip install video2calibration
 
 Here is the video recorded with the Kinect, the checkerboard has to be twisted especially around the corners of the frames to favorite the algorithm successfulness.
 
-<video src="https://github.com/fedona/MOT-3D-Reconstruction/blob/main/videos/calibration2.mp4" width="320" height="240" controls>
-
-## Generate Videos from Images
-While working with images, a very useful tool for videos generation, image trasformations, frames extracions, overlaying, ect... can be [ffmpeg](https://ffmpeg.org/). For example, with this simple and intuitive command it is possible to generate an output video from a list of input png images:
-
-```bash
-ffmpeg -framerate 30 -pattern_type glob -i '*.png' -c:v libx264 -pix_fmt yuv420p output.mp4
-```
+<img src="https://github.com/fedona/MOT-3D-Reconstruction/blob/main/videos/calibration.gif">
 
 ## BundleSDF on Ubuntu 20.04, Setup and Modifications
 [BundleSDF](https://bundlesdf.github.io/) is a method for 6-Dof tracking and 3D reconstruction of unknown objects from a monocular RGBD video sequence.
@@ -137,6 +130,31 @@ When BundleSDF happends to produce output pose_vis images with odd numer of pixe
 ```bash
     ffmpeg -i input.png -vf scale=1280:720 output.png # with final resolution 1280x720
 ```
+
+### Produce pose_vis Videos
+BundleSDF does generate under the folder pose_vis images of the predicted pose's bounding box around the subject. In order to comfortably see these results it is possible to generate a video using [ffmpeg](https://ffmpeg.org/).
+
+Ffmpeg is a useful tool when working with images and audio files, it is also used for image trasformations, frames extracions, overlaying, format conversion, ...
+For example, with this simple and intuitive command it is possible to generate an output video from a list of input png images:
+
+```bash
+   ffmpeg -framerate 30 -pattern_type glob -i '*.png' -c:v libx264 -pix_fmt yuv420p output.mp4
+```
+
+To produce videos using ffmpeg it is necessary to have frames of same resolution, and since BundleSDF happends to generate frames of odd resolution it might be necessary to resize them.
+
+This command is used to resize any frame to a correct resolution:
+```bash
+   for file in *.png; do
+       ffmpeg -i "$file" -vf "scale=854:480" "resized/$file"
+   done
+```
+
+This is the final result:
+
+<img src="https://github.com/fedona/MOT-3D-Reconstruction/blob/main/videos/dragon.gif">
+
+Check out [videos.sh](https://github.com/fedona/MOT-3D-Reconstruction/blob/main/BundleSDF/videos.sh) for a complete script that resizes the frames in the pose_vis folder and generates a mp4 video.
 
 ## ADD and CD Scores
 In the field of pose estimation and 3D reconstruction there are many different errors/scores used to evaluate the results, for example, in the [BOP Challenge 2023](https://bop.felk.cvut.cz/challenges/bop-challenge-2023/#task4) there are considered three of them:
