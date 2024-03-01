@@ -61,6 +61,14 @@ rgb = capture.color[:, :, :3]
 depth = capture.transformed_depth
 ```
 
+The function `transformed_depth` automatically transforms the depth camera images to the same format as the rgb camera images, this is not necessary but simplifies the work for later use, as this makes necessary to specify only one single camera calibration file instead of two. Popular datasets as the ones used in the BOP Challenge all specify one single camera calibration configuration for both rgb and depth images.
+
+Here follows an overlay of a rgb video with the colored depth images produced with the above function.
+
+<div align='center'><img src='https://github.com/fedona/MOT-3D-Reconstruction/blob/main/videos/rgbd_blend.gif'></div>
+
+It is good to notice that the uncolored parts of the frames corresponds to those parts that are invisible from the point of view of the depth camera but visible from the one of the rgb camera.
+
 Check out the [streamAndRecord.py](https://github.com/fedona/MOT-3D-Reconstruction/blob/main/Microsoft%20Azure%20Kinect/streamAndRecord.py) file for a complete version  of it!
 
 ### Camera Calibration File
@@ -89,11 +97,13 @@ pip install video2calibration
 
 Here is the video recorded with the Kinect, the checkerboard has to be twisted especially around the corners of the frames to favorite the algorithm successfulness.
 
-<img src="https://github.com/fedona/MOT-3D-Reconstruction/blob/main/videos/calibration.gif">
+<div align='center'><img src="https://github.com/fedona/MOT-3D-Reconstruction/blob/main/videos/calibration.gif"></div>
 
-## BundleSDF on Ubuntu 20.04, Setup and Modifications
+## BundleSDF on Ubuntu 20.04
 [BundleSDF](https://bundlesdf.github.io/) is a method for 6-Dof tracking and 3D reconstruction of unknown objects from a monocular RGBD video sequence.
 At the time of February 2024, its official [github repository](https://github.com/NVlabs/BundleSDF) provides straightforward instructions to setup their docker image and run the code successfully. 
+
+### Setup
 
 Although this should be machine-independent as docker is installed and there is an available CUDA GPU, it has been necessary to install `g++-11` before building the docker image, here follows a list of commands to do so:
 
@@ -106,6 +116,8 @@ sudo apt install build-essential manpages-dev software-properties-common
 sudo add-apt-repository ppa:ubuntu-toolchain-r/test
 sudo apt update && sudo apt install gcc-11 g++-11
 ```
+
+### Modifications
 
 The authors tested BundleSDF on ubuntu 18.04 with a GeForce RTX 3090 as mentioned [here](https://github.com/NVlabs/BundleSDF/issues/18#issuecomment-1612242390) and suggest to have lot of [memory available](https://github.com/NVlabs/BundleSDF/issues/58#issuecomment-1671929927).
 
@@ -123,16 +135,10 @@ An other necessary modification to the code has to be made in run_custom.py, whe
 ```
 on this same file is possible to tweak other parameters, for examples the ones that determine the minimal angle between different keyframes.
 
-
-### Resize Output Images
-When BundleSDF happends to produce output pose_vis images with odd numer of pixels, ffmpeg will fail to generate a video. For this case it is necessary to first resize those images to the correct resolution with this command: 
-
-```bash
-    ffmpeg -i input.png -vf scale=1280:720 output.png # with final resolution 1280x720
-```
-
 ### Produce pose_vis Videos
 BundleSDF does generate under the folder pose_vis images of the predicted pose's bounding box around the subject. In order to comfortably see these results it is possible to generate a video using [ffmpeg](https://ffmpeg.org/).
+
+<div align='center'><img src="https://github.com/fedona/MOT-3D-Reconstruction/blob/main/images/ffmpeg_logo.png" height=100></div>
 
 Ffmpeg is a useful tool when working with images and audio files, it is also used for image trasformations, frames extracions, overlaying, format conversion, ...
 For example, with this simple and intuitive command it is possible to generate an output video from a list of input png images:
@@ -141,7 +147,7 @@ For example, with this simple and intuitive command it is possible to generate a
    ffmpeg -framerate 30 -pattern_type glob -i '*.png' -c:v libx264 -pix_fmt yuv420p output.mp4
 ```
 
-To produce videos using ffmpeg it is necessary to have frames of same resolution, and since BundleSDF happends to generate frames of odd resolution it might be necessary to resize them.
+To produce videos using ffmpeg it is necessary to have frames of same resolution, and since BundleSDF happends to generate frames of odd resolution it might be necessary to resize them or ffmpeg will fail to generate a video.
 
 This command is used to resize any frame to a correct resolution:
 ```bash
@@ -152,7 +158,7 @@ This command is used to resize any frame to a correct resolution:
 
 This is the final result:
 
-<img src="https://github.com/fedona/MOT-3D-Reconstruction/blob/main/videos/dragon.gif">
+<div align='center'><img src="https://github.com/fedona/MOT-3D-Reconstruction/blob/main/videos/dragon.gif"></div>
 
 Check out [videos.sh](https://github.com/fedona/MOT-3D-Reconstruction/blob/main/BundleSDF/videos.sh) for a complete script that resizes the frames in the pose_vis folder and generates a mp4 video.
 
