@@ -137,6 +137,12 @@ An other necessary modification to the code has to be made in run_custom.py, whe
 ```python
     cfg_bundletrack['depth_processing']["zfar"] = 4  # object distant 4 meters from the camera 
 ```
+Otherwise BundleSDF will fail to initialize the point cloud and will output this error code:
+```bash
+   [pcl::PLYWriter::writeASCII] Input point cloud has no data!
+   [pcl::KdTreeFLANN::setInputCloud] Cannot create a KDTree with an empty input cloud!
+   [pcl::PLYWriter::writeASCII] Input point cloud has no data!
+```
 on this same file is possible to tweak other parameters, for examples the ones that determine the minimal angle between different keyframes.
 
 ### Prepare your own dataset
