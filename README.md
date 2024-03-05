@@ -186,6 +186,8 @@ Check out [videos.sh](https://github.com/fedona/MOT-3D-Reconstruction/blob/main/
 
 ## BlenderProc
 
+Check out also BlendedMVS
+
 ## ADD and CD Scores
 In the field of pose estimation and 3D reconstruction there are many different errors/scores used to evaluate the results, for example, in the [BOP Challenge 2023](https://bop.felk.cvut.cz/challenges/bop-challenge-2023/#task4) there are considered three of them:
 * VSD (Visible Surface Discrepancy)
