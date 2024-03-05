@@ -109,7 +109,7 @@ At the time of February 2024, its official [github repository](https://github.co
 
 ### Setup
 
-Although this should be machine-independent as docker is installed and there is an available CUDA GPU, it has been necessary to install `g++-11` before building the docker image, here follows a list of commands to do so:
+The built docker container misses the necessary compiler version `g++-11`, here are the commands to install it inside the docker container before compiling the source code of BundleSDF:
 
 ```bash
 # check if g++-11 is installed
