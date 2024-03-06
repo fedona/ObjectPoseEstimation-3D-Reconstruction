@@ -5,8 +5,9 @@ import argparse
 import sys
 
 """
-    Short python script to extract poses computed by BundleSDF and put them
-    in the same json file following the BOP's datasets standard
+    Short python script to get camera gt poses from the file cam_poses_level0.npy that is being used in the SAM6D demo
+    to produce the demo's dataset:
+        the object is fixed and there are 42 different cameras rendering the object in different poses
 """
 def  main():
     # Path to the folder containing predicted poses
