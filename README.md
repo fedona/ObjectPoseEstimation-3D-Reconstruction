@@ -48,7 +48,7 @@ The library provides helpful funtions and a list of useful examples written in C
 
 
 Configure the cameras settings and start the device:
-```
+```python
 config = Config(
             color_resolution=pyk4a.ColorResolution.RES_720P,
             depth_mode=pyk4a.DepthMode.NFOV_UNBINNED,
@@ -59,7 +59,7 @@ device.start()
 ```
 
 Capture images from the cameras:
-```
+```python
 capture = device.get_capture()
 rgb = capture.color[:, :, :3]
 depth = capture.transformed_depth
