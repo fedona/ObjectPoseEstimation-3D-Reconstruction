@@ -10,8 +10,6 @@ import sys
         the object is fixed and there are 42 different cameras rendering the object in different poses
 """
 def  main():
-    # Path to the folder containing predicted poses
-
     
     folder_path = "./cam_poses_level0.npy"
     poses = {}
