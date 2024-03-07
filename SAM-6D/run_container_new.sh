@@ -1,3 +1,0 @@
-# shell script  modified from BundleSDF's original script to container interactively (-it) and such that Datasets, Results, and BundleSDF directory are visible
-DIR=$(pwd)/../
-docker run --gpus all --env NVIDIA_DISABLE_REQUIRE=1 -it --network=host --name bundlesdf --cap-add=SYS_PTRACE --security-opt seccomp=unconfined  -v /home:/home -v /tmp:/tmp -v /mnt:/mnt -v $DIR:$DIR -v /local/home/fedona/Desktop/ETH/Bachelor/Datasets:/local/home/fedona/Desktop/ETH/Bachelor/Datasets -v /local/home/fedona/Desktop/ETH/Bachelor/Results:/local/home/fedona/Desktop/ETH/Bachelor/Results  --ipc=host -e DISPLAY=${DISPLAY} bundlesdf:latest bash
