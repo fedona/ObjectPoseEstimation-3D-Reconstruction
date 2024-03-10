@@ -204,8 +204,24 @@ Its github repository provides a demo on "custom" data, actually what it does is
 Unfortunately the demo is not very useful at the moment to test custom data. There are not clear instructions on how to run the model out of the BOP challenge datasets.
 Here are provided a Dockerfile to build the correct CUDA environment to run the demo, plus a short python script that does get the different camera poses used in the demo to generate the input pictures for the model.
 
-## megapose6d
-[megapose6d](https://megapose6d.github.io/) is an other method in the BOP challenge, currently ranked at ninth place. 
+## MegaPose
+[MegaPose6D](https://megapose6d.github.io/) is an other method in the BOP challenge, currently ranked at ninth place.
+
+Its github repository provides a demo for testing, and this can load different sub-modules:
+* <ins>megapose-1.0-RGB</ins>
+* <ins>megapose-1.0-RGBD</ins>; which requires depth
+* <ins>megapose-1.0-RGB-multi-hypothesis</ins>
+* <ins>megapose-1.0-RGB-multi-hypothesis-icp</ins>; which requires depth
+
+The first two modules run the standard version of megapose, with or without depth informations, while the last two run a better version of megaposes that considers multiples pose hypothesis and picks the best out of them, either using the iterative couple refinement method or not.
+
+The demo loads `megapose-1.0-RGB-multi-hypothesis` as default model, to change it is necessary to add the flag `--model` followed by its name:
+
+```bash
+   python -m megapose.scripts.run_inference_on_example "$subfolder_name" --run-inference --model "megapose-1.0-RGB-multi-hypothesis-icp"
+```
+
+Here are provided a short bash [script to convert a dataset](https://github.com/fedona/MOT-3D-Reconstruction/blob/main/megapose6d/dst_for_megapose/script.sh) generated using the above mentioned "StreamAndRecord.py" script such that it can be feed to megapose, a bash [script to generate videos](https://github.com/fedona/MOT-3D-Reconstruction/blob/main/megapose6d/dst_for_megapose/video.sh) from the resulting images, and some .json files with the respective camera calibration informations for blenderproc datasets, tudl dataset, and kiect-azure recorded images.
 
 ## ADD and CD Scores
 In the field of pose estimation and 3D reconstruction there are many different errors/scores used to evaluate the results, for example, in the [BOP Challenge 2023](https://bop.felk.cvut.cz/challenges/bop-challenge-2023/#task4) there are considered three of them:
