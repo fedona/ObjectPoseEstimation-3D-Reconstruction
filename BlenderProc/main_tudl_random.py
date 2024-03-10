@@ -12,6 +12,8 @@ import numpy as np
     This is just an example of how with a few lines of code is possible to get a good contiguous synthetic video
     for object detection and pose estimation tasks that has groud truth poses in BOP challenge format.
 
+    Check out the original script here: https://github.com/DLR-RM/BlenderProc/blob/main/examples/datasets/bop_challenge/main_tudl_random.py
+
 """
 
 parser = argparse.ArgumentParser()
