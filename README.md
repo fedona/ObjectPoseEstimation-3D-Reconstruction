@@ -203,14 +203,6 @@ This is the final result:
 
 Check out [videos.sh](https://github.com/fedona/MOT-3D-Reconstruction/blob/main/BundleSDF/videos.sh) for a complete script that resizes the frames in the pose_vis folder and generates a mp4 video.
 
-## SAM6D
-[SAM6D](https://github.com/JiehongLin/SAM-6D) is a pipeline for object detection and pose estimation, at this time (March 2024), it is second place in the BOP challenge for novel objects.
-
-Its github repository provides a demo on "custom" data, actually what it does is to generate about 40 different synthetic images of an object in different poses and computes its pose estimations.
-
-Unfortunately the demo is not very useful at the moment to test custom data. There are not clear instructions on how to run the model out of the BOP challenge datasets.
-Here are provided a Dockerfile to build the correct CUDA environment to run the demo, plus a short python script that does get the different camera poses used in the demo to generate the input pictures for the model.
-
 ## MegaPose
 [MegaPose6D](https://megapose6d.github.io/) is an other method in the BOP challenge, currently ranked at ninth place.
 
@@ -235,6 +227,14 @@ The following is an example of megapose-1.0-RGB-multi-hypothesis model running o
 
 <div align='center'><img src="https://github.com/fedona/MOT-3D-Reconstruction/blob/main/videos/blenderproc_dragon_megapose.gif"></div>
 
+## SAM6D
+[SAM6D](https://github.com/JiehongLin/SAM-6D) is a pipeline for object detection and pose estimation, at this time (March 2024), it is second place in the BOP challenge for novel objects.
+
+Its github repository provides a demo on "custom" data, actually what it does is to generate about 40 different synthetic images of an object in different poses and computes its pose estimations.
+
+Unfortunately the demo is not very useful at the moment to test custom data. There are not clear instructions on how to run the model out of the BOP challenge datasets.
+Here are provided a Dockerfile to build the correct CUDA environment to run the demo, plus a short python script that does get the different camera poses used in the demo to generate the input pictures for the model.
+
 ## ADD and CD Scores
 In the field of pose estimation and 3D reconstruction there are many different errors/scores used to evaluate the results, for example, in the [BOP Challenge 2023](https://bop.felk.cvut.cz/challenges/bop-challenge-2023/#task4) there are considered three of them:
 * VSD (Visible Surface Discrepancy)
@@ -242,7 +242,7 @@ In the field of pose estimation and 3D reconstruction there are many different e
 * MSPD (Maximum Symmetry-Aware Projection Distance)
 
 To keep it short and simple here there are the implementations for computing two basic scores, one for the pose estimation and one for 3D reconstruction:
-* ADD (Average Distance of the Data), having both ground truth and predicted poses, it projects any object to this poses and compares the results computing the mean distance between points, the score is the results of the ratio between poses that are below an acceptance threshold (typically 10% of the object's diameter) and the total number of poses.
+* ADD (Average Distance of Model Points for objects with no indistinguishable view), having both ground truth and predicted poses, it projects any object to this poses and compares the results computing the mean distance between points, the score is the results of the ratio between poses that are below an acceptance threshold (typically 10% of the object's diameter) and the total number of poses.
 
   <img src="https://github.com/fedona/MOT-3D-Reconstruction/blob/main/images/addScore.png">
   
@@ -280,6 +280,7 @@ To keep it short and simple here there are the implementations for computing two
 
     return mean_distance
   ```
+* ADI(Average Distance of Model Points for objects with indistinguishable views)
   
 * CD (Chamfer Distance), having both the ground truth and predicted 3D reconstruction of the object, computes the distance of each point of the objects to the closest point of the other object.
   
