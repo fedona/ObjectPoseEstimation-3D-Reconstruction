@@ -230,6 +230,11 @@ The demo loads `megapose-1.0-RGB-multi-hypothesis` as default model, to change i
 
 Here are provided a short bash [script to convert a dataset](https://github.com/fedona/MOT-3D-Reconstruction/blob/main/megapose6d/dst_for_megapose/script.sh) generated using the above mentioned "StreamAndRecord.py" script such that it can be feed to megapose, a bash [script to generate videos](https://github.com/fedona/MOT-3D-Reconstruction/blob/main/megapose6d/dst_for_megapose/video.sh) from the resulting images, and some .json files with the respective camera calibration informations for blenderproc datasets, tudl dataset, and kiect-azure recorded images.
 
+The following is an example of megapose-1.0-RGB-multi-hypothesis model running on a blenderproc-generated synthetic dataset:
+
+
+<div align='center'><img src="https://github.com/fedona/MOT-3D-Reconstruction/blob/main/videos/blenderproc_dragon_megapose.gif"></div>
+
 ## ADD and CD Scores
 In the field of pose estimation and 3D reconstruction there are many different errors/scores used to evaluate the results, for example, in the [BOP Challenge 2023](https://bop.felk.cvut.cz/challenges/bop-challenge-2023/#task4) there are considered three of them:
 * VSD (Visible Surface Discrepancy)
