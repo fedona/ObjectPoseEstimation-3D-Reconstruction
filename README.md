@@ -1,4 +1,4 @@
-# MOT-3D-Reconstruction
+# ObjectPoseEstimation&3D-Reconstruction
 This short repository contains the code snippets and modifications that have been necessary to generate a RGBD dataset using a Microsoft Kinect camera, setup
 some MOT & 3D Reconstruction SOTA codes, and produce ADD and CD scores for respectively the accuracy of the pose estimation and 3D reconstruction.
 
