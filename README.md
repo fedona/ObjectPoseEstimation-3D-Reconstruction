@@ -60,9 +60,9 @@ device.start()
 
 Capture images from the cameras:
 ```python
-capture = device.get_capture()
-rgb = capture.color[:, :, :3]
-depth = capture.transformed_depth
+   capture = device.get_capture()
+   rgb = capture.color[:, :, :3]
+   depth = capture.transformed_depth
 ```
 
 The function `transformed_depth` automatically transforms the depth camera images to the same format as the rgb camera images, this is not necessary but simplifies the work for later use, as this makes necessary to specify only one single camera calibration file instead of two. Popular datasets as the ones used in the BOP Challenge all specify one single camera calibration configuration for both rgb and depth images.
@@ -178,7 +178,7 @@ Ffmpeg is a useful tool when working with images and audio files, it is also use
 For example, with this simple and intuitive command it is possible to generate an output video from a list of input png images:
 
 ```bash
-   ffmpeg -framerate 30 -pattern_type glob -i '*.png' -c:v libx264 -pix_fmt yuv420p output.mp4
+   ffmpeg -framerate 30 -pattern_type glob -i "*.png" -c:v libx264 -pix_fmt yuv420p "video.mp4"
 ```
 
 To produce videos using ffmpeg it is necessary to have frames of same resolution, and since BundleSDF happends to generate frames of odd resolution it might be necessary to resize them or ffmpeg will fail to generate a video.
