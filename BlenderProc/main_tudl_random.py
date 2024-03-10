@@ -4,6 +4,16 @@ import os
 import math
 import numpy as np
 
+"""
+
+    This short script is a copy of the python script "main_tudl_random" with some little personal modifications (chech #FEDONA spots)
+    made to produce images that are not taken from random locations but from a precise camera trajectory.
+
+    This is just an example of how with a few lines of code is possible to get a good contiguous synthetic video
+    for object detection and pose estimation tasks that has groud truth poses in BOP challenge format.
+
+"""
+
 parser = argparse.ArgumentParser()
 parser.add_argument('bop_parent_path', help="Path to the bop datasets parent directory")
 parser.add_argument('cc_textures_path', default="resources/cctextures", help="Path to downloaded cc textures")
