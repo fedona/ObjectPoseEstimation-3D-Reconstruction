@@ -109,7 +109,14 @@ Here is the video recorded with the Kinect, the checkerboard has to be twisted e
 
 It is very useful in this scope because provides example scripts for generating scenes with BOP's datasets objects in both occluded or non-occluded scenarios, and because in the meanwhile keeps track of the object's poses and outputs them following the its standard format. It also automatically provides the camera calibration informations for every scene it generates.
 
+Example of blenderproc generated images for BOP training:
+<div align='center'><img src="https://github.com/fedona/MOT-3D-Reconstruction/blob/main/videos/blenderproc_example.gif"></div>
+
 This repository contains a short script taken from blenderproc and modified slightly to generate contigouos images instead of scattered. It is an example of what an useful tool blenderproc can be to generate your own personal synthetic dataset.
+
+Example of what the script produces:
+
+<div align='center'><img src="https://github.com/fedona/MOT-3D-Reconstruction/blob/main/videos/blenderproc_dragon.gif"></div>
 
 ## BundleSDF on Ubuntu 20.04
 [BundleSDF](https://bundlesdf.github.io/) is a method for 6-Dof tracking and 3D reconstruction of unknown objects from a monocular RGBD video sequence.
