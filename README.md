@@ -103,6 +103,14 @@ Here is the video recorded with the Kinect, the checkerboard has to be twisted e
 
 <div align='center'><img src="https://github.com/fedona/MOT-3D-Reconstruction/blob/main/videos/calibration.gif"></div>
 
+## BlenderProc
+
+[BlenderProc](https://github.com/DLR-RM/BlenderProc) is a pipeline for photorealistic scenes rendering. It is commonly used by many pipelines from the BOP challenge to generate lots of synthetic data to train their models.
+
+It is very useful in this scope because provides example scripts for generating scenes with BOP's datasets objects in both occluded or non-occluded scenarios, and because in the meanwhile keeps track of the object's poses and outputs them following the its standard format. It also automatically provides the camera calibration informations for every scene it generates.
+
+This repository contains a short script taken from blenderproc and modified slightly to generate contigouos images instead of scattered. It is an example of what an useful tool blenderproc can be to generate your own personal synthetic dataset.
+
 ## BundleSDF on Ubuntu 20.04
 [BundleSDF](https://bundlesdf.github.io/) is a method for 6-Dof tracking and 3D reconstruction of unknown objects from a monocular RGBD video sequence.
 At the time of February 2024, its official [github repository](https://github.com/NVlabs/BundleSDF) provides straightforward instructions to setup their docker image and run the code successfully. 
@@ -145,7 +153,7 @@ Otherwise BundleSDF will fail to initialize the point cloud and will output this
 ```
 on this same file is possible to tweak other parameters, for examples the ones that determine the minimal angle between different keyframes.
 
-### Prepare your own dataset
+### Run on your own dataset
 The official repository provides a small example of a gallon of milk video available [here](https://drive.google.com/file/d/1akutk_Vay5zJRMr3hVzZ7s69GT4gxuWN/view?usp=share_link). This can be used to test if the code correctly runs without having to download large datasets as the suggested HO3D and YCBInEOAT.
 
 If the "milk dataset" correctly runs then it is possible to prepare your own dataset; this has to be organized in the following way:
@@ -189,10 +197,15 @@ This is the final result:
 Check out [videos.sh](https://github.com/fedona/MOT-3D-Reconstruction/blob/main/BundleSDF/videos.sh) for a complete script that resizes the frames in the pose_vis folder and generates a mp4 video.
 
 ## SAM6D
+[SAM6D](https://github.com/JiehongLin/SAM-6D) is a pipeline for object detection and pose estimation, at this time (March 2024), it is second place in the BOP challenge for novel objects.
 
-## BlenderProc
+Its github repository provides a demo on "custom" data, actually what it does is to generate about 40 different synthetic images of an object in different poses and computes its pose estimations.
 
-Check out also BlendedMVS
+Unfortunately the demo is not very useful at the moment to test custom data. There are not clear instructions on how to run the model out of the BOP challenge datasets.
+Here are provided a Dockerfile to build the correct CUDA environment to run the demo, plus a short python script that does get the different camera poses used in the demo to generate the input pictures for the model.
+
+## megapose6d
+[megapose6d](https://megapose6d.github.io/) is an other method in the BOP challenge, currently ranked at ninth place. 
 
 ## ADD and CD Scores
 In the field of pose estimation and 3D reconstruction there are many different errors/scores used to evaluate the results, for example, in the [BOP Challenge 2023](https://bop.felk.cvut.cz/challenges/bop-challenge-2023/#task4) there are considered three of them:
