@@ -252,7 +252,7 @@ To keep it short and simple here there are the implementations for computing two
     Compute the ADD score between two poses.
 
     Parameters:
-    - pts3d: Numpy matrix of 3D points. nx3
+    - pts3d: Numpy matrix of 3D points of model object. nx3
     - gt_pose: Tuple containing ground truth pose (R_gt, t_gt).
     - pred_pose: Tuple containing predicted pose (R_pred, t_pred).
 
@@ -260,24 +260,25 @@ To keep it short and simple here there are the implementations for computing two
     - mean_distance
     """
     R_gt, t_gt = gt_pose        # 3x3, 3x1
-    R_pred, t_pred = pred_pose
+    R_est, t_est = pred_pose
 
-    ## Transform predicted pose to relative prediction pose
-    R_pred = R.from_matrix(R_rel).as_matrix() @ R_pred
-    t_pred = t_pred + t_rel
+    t_est = t_rel + t_est
+    R_est = R.from_matrix(R_est).as_matrix() @ R_rel
 
     # Transform 3D points to camera coordinate system
     pts3d_camera_gt = R_gt @ (pts3d.T) + t_gt
 
     # Transform 3D points to camera coordinate system
-    pts3d_camera_pred = R_pred @ (pts3d.T) + t_pred
+    pts3d_camera_pred = R_est @ (pts3d.T) + t_est
 
     # Compute distances between corresponding points
     distance = np.linalg.norm(pts3d_camera_gt - pts3d_camera_pred, axis=0)  # compute norm among the columns (distance between each point)
-    mean_distance = np.mean(distance)   # mean of the distances
-  
-    print('  distance between points: {}'.format(distance))
+    # Meanof the distances
+    mean_distance = np.mean(distance)
+    max_distance = np.max(distance)
+    min_distance = np.min(distance)
 
+    print('  distance between points: {}'.format(distance))
     return mean_distance
   ```
 * ADI(Average Distance of Model Points for objects with indistinguishable views)
